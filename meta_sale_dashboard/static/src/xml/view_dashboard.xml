@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t t-name="Dashboard">
+        <div class="oh_dashboards">
+            <div class="container-fluid my-5 o_hr_dashboard"/>
+        </div>
+    </t>
+
+    <t t-name="Time">
+        <section class="dashboard_main_section" id="main_section_time">
+            <div class="row">
+                <div class="col-sm-12 mb-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-8">
+                            <h2 class="section-header">Sales Dashboard</h2>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-4">
+                            <form class="form-group">
+                                <select id="time_range_values" class="form-control" t-model="selected_option">
+                                    <option id="this_year" value="this_year">Last 365 days</option>
+                                    <option id="this_month" value="this_month">Last 30 days</option>
+                                    <option id="this_week" value="this_week" selected="this_week">Last 7 days</option>
+                                    <option id="one_day" value="one_day">Last 24 hours</option>
+                                </select>
+                            </form>
+                        </div>
+                    </div>
+                    <hr/>
+                </div>
+            </div>
+        </section>
+    </t>
+
+
+    <t t-name="DashboardOrder">
+        <section class="dashboard_main_section" id="main_section_order">
+            <div class="sale_dash_cards row">
+                <div class="col-sm-12 col-md-3">
+                    <div class="dashboard-card card-shadow total_quotation">
+                        <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                            <i class="fa fa-line-chart text-mauve"/>
+                        </div>
+                        <div class="dashboard-card__details">
+                            <h3>
+                                <span>
+                                    <div id="quotations_this_year"/>
+                                    <div id="quotations_this_month"/>
+                                    <div id="quotations_one_day"/>
+                                    <div id="quotations_this_week"/>
+                                </span>
+                            </h3>
+                            <p style="font-size:13px ; color:blue">Total Drafts</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-3">
+                    <div class="dashboard-card card-shadow cancl_order">
+                        <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                            <i class="fa fa-ban text-mauve"/>
+                        </div>
+                        <div class="dashboard-card__details">
+                            <h3>
+                                <span>
+                                    <div id="cancelled_this_year"/>
+                                    <div id="cancelled_this_month"/>
+                                    <div id="cancelled_this_week"/>
+                                    <div id="cancelled_one_day"/>
+                                </span>
+                            </h3>
+                            <p style="font-size:13px ; color:red">Cancelled Orders</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-3">
+                    <div class="dashboard-card card-shadow sale_ordr">
+                        <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                            <i class="fa fa-line-chart text-mauve"/>
+                        </div>
+                        <div class="dashboard-card__details">
+                            <h3>
+                                <span>
+                                    <div id="ordered_this_year"/>
+                                    <div id="ordered_this_month"/>
+                                    <div id="ordered_this_week"/>
+                                    <div id="ordered_one_day"/>
+                                </span>
+                            </h3>
+                            <p style="font-size:13px ; color:green">Sales Orders</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-sm-12 col-md-3">
+                    <div class="dashboard-card card-shadow revenue_card customers">
+                        <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                            <i class="fa fa-users text-mauve"/>
+                        </div>
+                        <div class="dashboard-card__details">
+                            <h3>
+                                <span>
+                                    <div id="customer_this_year"/>
+                                    <div id="customer_this_month"/>
+                                    <div id="customer_this_week"/>
+                                    <div id="customer_one_day"/>
+                                </span>
+                            </h3>
+                            <p style="font-size:13px">Customers</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-sm-12 col-md-12">
+                    <!-- QUANTITY BAR VIEW -->
+                    <!-- <div class="bar-fill"> -->
+                        <h2>Top Products Quantity (30 Days)</h2>
+                        <hr/>
+                        <div class="graph_canvas">
+                            <div>
+                                <canvas class="prdct_qntty_pr_mnth"/>
+                            </div>
+                        </div>
+                    <!-- </div> -->
+                </div>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-sm-12 col-md-12">
+                    <!-- TOTAL AMOUNT 30 DAYS BAR-->
+                        <h2>Top product total amount in (30 Days)</h2>
+                        <hr/>
+                        <div class="graph_canvas">
+                            <div>
+                                <canvas class="amount_per_month"/>
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+
+
+            <div class="row mt-5">
+
+                <div class="col-sm-12 col-md-4">
+                    <!-- Top Deals -->
+                    <div class="top_deals_div chart-container card-shadow align-items-center">
+                        <h2>Top Sales Order</h2>
+                        <hr/>
+                        <div class="items-table">
+                            <div class="item-container">
+                                <t t-foreach="widget.top_deals" t-as="activity">
+                                    <div class="item-header">
+                                        <div class="count-container">
+                                            <t t-esc="activity[6]"/>
+                                        </div>
+                                        <div class="item-title pl-3">
+                                            <h3><t t-esc="activity[3]"/> - <t t-esc="activity[5]"/><t t-esc="activity[2]"/></h3>
+                                            <div class="item-content">
+                                                <ul>
+                                                    <t>
+                                                        Customer: <t t-esc="activity[0]"/>
+                                                    </t>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-4">
+                    
+                    <!-- Sale Order STATE PIE -->
+                    <div class="total_status_pie_div half_chart chart-container card-shadow">
+                        <h2>Sales Order State</h2>
+                        <hr/>
+                        <div class="graph_canvas">
+                            <canvas class="quotation_status" width="200" height="120"/>
+                        </div>
+                    </div>
+
+                    <!-- TOTAL QUOTATION PIE VIEW -->
+                    <div class="leads_month_pie_div half_chart chart-container card-shadow">
+                        <h2>Total Quotations Per Month</h2>
+                        <hr/>
+                        <div class="graph_canvas">
+                            <canvas class="quotation_month" width="200" height="120"/>
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-4">
+                    <!-- Order State PIE -->
+                    <div class="order_status_pie_div half_chart chart-container card-shadow">
+                        <h2>Order Status</h2>
+                        <hr/>
+                        <div class="graph_canvas">
+                            <canvas class="sale_order_status" width="200" height="120"/>
+                        </div>
+                    </div>
+
+                    <!-- Invoice status -->
+                    <div class="invoice_status_pie_div half_chart chart-container card-shadow">
+                        <h2>Invoice Status</h2>
+                        <hr/>
+                        <div class="graph_canvas">
+                            <canvas class="invoice_status" width="200" height="120"/>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+    </t>
+
+</templates>

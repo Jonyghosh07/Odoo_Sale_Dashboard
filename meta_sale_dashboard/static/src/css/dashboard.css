@@ -1,0 +1,11 @@
+html .o_web_client > .o_action_manager {
+    overflow:scroll;
+}
+  
+.bar-fill {
+  position: relative; /* Position the bar-fill element within the bar */
+  bottom: 0; /* Align the bottom of the bar-fill element with the bottom of the bar */
+  width: 660px; /* Width of the filled part of the bar */
+  height: 100%;
+}
+  

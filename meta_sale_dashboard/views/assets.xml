@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="assets_sale_dashboard" name="Sale Dashboard" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" type="text/css" href="/meta_sale_dashboard/static/src/css/dashboard.css"/>
+            <link rel="stylesheet" type="text/css" href="/meta_sale_dashboard/static/src/css/style.scss"/>
+            <script type="text/javascript" src="/meta_sale_dashboard/static/src/js/dashboard_view.js"/>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"/>
+        </xpath>
+    </template>
+
+</odoo>
